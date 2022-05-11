@@ -1,0 +1,130 @@
+body{
+    background-color: #f7f7e6;
+}
+
+.wrapper{
+    height: 720px;
+    width: 540px;
+    margin:  100px auto 0 auto;
+    position: relative;
+}
+
+.slider{
+    height: inherit;
+    width: inherit;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+    border-radius: 15px;
+}
+
+.slides{
+    height: inherit;
+    width: inherit;
+    opacity: 0;
+    position: absolute;
+    z-index: 0;
+    transform: scale(1.5);
+    transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+}
+
+.slide1{
+    background-image: url("images/candy.jpeg");
+}
+.slide2{
+    background-image: url("images/cat.jpeg");
+}
+.slide3{
+    background-image: url("images/strawbery.png");
+}
+.slide4{
+    background-image: url("images/tongue.jpeg");
+}
+
+.slider-wrap-text{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.slider-description{
+    transition: transform 1s ease;
+}
+
+.slider-description p {
+    height: inherit;
+    width: inherit;
+    opacity: 0;
+    position: absolute;
+    z-index: 0;
+    transform: scale(1.5);
+    transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+}
+
+p{
+    font-size: 20px;
+    color: transparent;
+    background: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 3px 3px rgba(255,255,255,0.5);
+}
+
+#slide1:checked ~ .slider > .slide1,
+#slide1:checked ~ .slider-description > .slide-text-1,
+#slide2:checked ~ .slider > .slide2,
+#slide2:checked ~ .slider-description > .slide-text-2,
+#slide3:checked ~ .slider > .slide3,
+#slide3:checked ~ .slider-description > .slide-text-3,
+#slide4:checked ~ .slider > .slide4,
+#slide4:checked ~ .slider-description > .slide-text-4
+{
+    opacity: 1;
+    z-index: 1;
+    transform: scale(1);
+}
+
+.wrapper > input {
+    display: none;
+}
+
+.wrapper .controls {
+    right: 0;
+    margin-left: -98px;
+    position: absolute;
+}
+
+.wrapper label {
+    cursor: pointer;
+    display: inline-block;
+    height: 8px;
+    margin: 25px 12px 0 16px;
+    position: relative;
+    width: 8px;
+    border-radius: 50%;
+    transition: background ease-in-out .5s;
+}
+
+.wrapper label:hover,
+#slide1:checked ~ .controls label:nth-of-type(1),
+#slide2:checked ~ .controls label:nth-of-type(2),
+#slide3:checked ~ .controls label:nth-of-type(3),
+#slide4:checked ~ .controls label:nth-of-type(4),
+#slide5:checked ~ .controls label:nth-of-type(5) {
+    background: #ddd;
+}
+
+.wrapper label:after {
+    border: 2px solid #ddd;
+    content: " ";
+    display: block;
+    height: 12px;
+    left: -4px;
+    position: absolute;
+    top: -4px;
+    width: 12px;
+    border-radius: 50%;
+}
