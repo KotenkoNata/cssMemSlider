@@ -6,32 +6,60 @@
 body{
     background-color: #f7f7e6;
     font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+}
+
+.container{
+    width: 540px;
+    height: 1020px;
+    margin:  4rem auto 0 auto;
 }
 
 .wrapper{
-    height: 720px;
-    width: 540px;
-    margin:  100px auto 0 auto;
+    width: 100%;
+    height: 100%;
     position: relative;
-}
-
-.slider{
-    height: inherit;
-    width: inherit;
+    background-color: #f7f7e6;
     overflow: hidden;
-    position: relative;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
-    border-radius: 15px;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+    'content content'
+    'description control';
+    row-gap: 2rem;
 }
 
-.slides{
-    height: inherit;
-    width: inherit;
-    opacity: 0;
-    position: absolute;
-    z-index: 0;
-    transform: scale(1.5);
-    transition: transform ease-in-out .5s, opacity ease-in-out .5s;
+.wrapper > input{
+    display: none;
+}
+
+.slider-content-container, .slider-text-container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.slider-content-container{
+    grid-area: content;
+}
+
+.slider,
+.slider-description{
+    display: flex;
+    height: 100%;
+    transition: transform 1s ease;
+}
+
+.slider .slides{
+    display: inline-block;
+    width: 540px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 1rem;
 }
 
 .slide1{
@@ -47,31 +75,18 @@ body{
     background-image: url("images/desktop/tongue.jpeg");
 }
 
-.slider-wrap-text{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
+.slider-text-container{
+    grid-area: description;
 }
 
-.slider-description{
+.slider-description p{
     display: inline-block;
-    margin-left: 15px;
-    transition: transform 1s ease;
+    width: 540px;
+    height: 100%;
 }
 
-.slider-description p {
-    height: inherit;
-    width: inherit;
-    position: absolute;
-    opacity: 0;
-    z-index: 0;
-    transform: scale(1.5);
-    transition: transform ease-in-out .5s, opacity ease-in-out .5s;
-}
-
-p{
-    font-size: 20px;
+p {
+    margin-top: 5px;
     color: transparent;
     background: #666666;
     -webkit-background-clip: text;
@@ -80,31 +95,13 @@ p{
     text-shadow: 0 3px 3px rgba(255,255,255,0.5);
 }
 
-#slide1:checked ~ .slider > .slide1,
-#slide1:checked ~ .slider-description > .slide-text-1,
-#slide2:checked ~ .slider > .slide2,
-#slide2:checked ~ .slider-description > .slide-text-2,
-#slide3:checked ~ .slider > .slide3,
-#slide3:checked ~ .slider-description > .slide-text-3,
-#slide4:checked ~ .slider > .slide4,
-#slide4:checked ~ .slider-description > .slide-text-4
-{
-    opacity: 1;
-    z-index: 1;
-    transform: scale(1);
-}
-
-.wrapper > input {
-    display: none;
-}
-
-.controls {
+.controls{
     display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+    justify-content: space-around;
+    grid-area: control;
 }
 
-.controls label {
+.controls label{
     position: relative;
     display: inline-block;
     padding: 1.4rem;
@@ -112,7 +109,7 @@ p{
     transition: all 0.5s ease-out;
 }
 
-.controls label:before {
+.controls label::before{
     content: '';
     position: absolute;
     top: 0;
@@ -131,6 +128,23 @@ p{
     background-color: var(--color-hover);
 }
 
+#slide1:checked ~ .slider-content-container .slider,
+#slide1:checked ~ .slider-text-container .slider-description{
+    transform: translateX(0);
+}
+#slide2:checked ~ .slider-content-container .slider,
+#slide2:checked ~ .slider-text-container .slider-description{
+    transform: translateX(-540px);
+}
+#slide3:checked ~ .slider-content-container .slider,
+#slide3:checked ~ .slider-text-container .slider-description{
+    transform: translateX(-1080px);
+}
+#slide4:checked ~ .slider-content-container .slider,
+#slide4:checked ~ .slider-text-container .slider-description
+{
+    transform: translateX(-1620px);
+}
 
 #slide1:checked ~ .controls .control-1::before {
     background-color: var(--color-border);
@@ -146,37 +160,73 @@ p{
 }
 
 @media screen and (max-width: 720px) {
-
-    .wrapper{
-        height: 400px;
+    .container{
         width: 300px;
-        margin:  100px auto 0 auto;
-        position: relative;
+        height: 600px;
     }
-
-    .slider-description p{
-        bottom: -35%;
-        left: 0;
+    .wrapper{
+        grid-template-rows: 3fr 40px 40px;
+        grid-template-columns: 1fr;
+        grid-gap: 1rem;
+        grid-template-areas:
+      'content'
+      'control'
+      'description';
     }
 
     .controls{
         justify-content: center;
     }
 
-    .slide1{
-        background-image: url("images/mobile/candy-mobile.jpeg");
-        background-repeat: no-repeat;
+    .slider .slides{
+        width: 300px;
     }
-    .slide2{
-        background-image: url("images/mobile/cat-mobile.jpeg");
-        background-repeat: no-repeat;
+
+    .slider-description p{
+        width: 300px;
     }
-    .slide3{
-        background-image: url("images/mobile/strawbery-mobile.jpeg");
-        background-repeat: no-repeat;
+
+    .controls label{
+        margin-right: 0.2rem;
     }
-    .slide4{
-        background-image: url("images/mobile/tongue-mobile.jpeg");
-        background-repeat: no-repeat;
+
+    .controls label:last-of-type{
+        margin-right: 0;
+    }
+
+    .slider-description p{
+        text-align: center;
+        padding: 0;
+    }
+
+    #slide1:checked ~ .slider-content-container .slider,
+    #slide1:checked ~ .slider-text-container .slider-description{
+        transform: translateX(0);
+    }
+    #slide2:checked ~ .slider-content-container .slider,
+    #slide2:checked ~ .slider-text-container .slider-description{
+        transform: translateX(-300px);
+    }
+    #slide3:checked ~ .slider-content-container .slider,
+    #slide3:checked ~ .slider-text-container .slider-description{
+        transform: translateX(-600px);
+    }
+    #slide4:checked ~ .slider-content-container .slider,
+    #slide4:checked ~ .slider-text-container .slider-description
+    {
+        transform: translateX(-900px);
+    }
+
+    .slider.slide1{
+    background-image: url("images/mobile/candy-mobile.jpeg");
+    }
+    .slider.slide2{
+    background-image: url("images/mobile/cat-mobile.jpeg");
+    }
+    .slider.slide3{
+    background-image: url("images/mobile/strawbery-mobile.jpeg");
+     }
+    .slider.slide4{
+    background-image: url("images/mobile/tongue-mobile.jpeg");
     }
 }
