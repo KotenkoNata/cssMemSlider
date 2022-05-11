@@ -5,6 +5,7 @@
 }
 body{
     background-color: #f7f7e6;
+    font-family: 'Roboto', sans-serif;
 }
 
 .wrapper{
@@ -34,16 +35,16 @@ body{
 }
 
 .slide1{
-    background-image: url("images/candy.jpeg");
+    background-image: url("images/desktop/candy.jpeg");
 }
 .slide2{
-    background-image: url("images/cat.jpeg");
+    background-image: url("images/desktop/cat.jpeg");
 }
 .slide3{
-    background-image: url("images/strawbery.png");
+    background-image: url("images/desktop/strawbery.png");
 }
 .slide4{
-    background-image: url("images/tongue.jpeg");
+    background-image: url("images/desktop/tongue.jpeg");
 }
 
 .slider-wrap-text{
@@ -51,10 +52,10 @@ body{
     height: 100%;
     overflow: hidden;
     display: flex;
-    flex-direction: row;
 }
 
 .slider-description{
+    display: inline-block;
     margin-left: 15px;
     transition: transform 1s ease;
 }
@@ -62,8 +63,8 @@ body{
 .slider-description p {
     height: inherit;
     width: inherit;
-    opacity: 0;
     position: absolute;
+    opacity: 0;
     z-index: 0;
     transform: scale(1.5);
     transition: transform ease-in-out .5s, opacity ease-in-out .5s;
@@ -142,4 +143,40 @@ p{
 }
 #slide4:checked ~ .controls .control-4::before {
     background-color: var(--color-border);
+}
+
+@media screen and (max-width: 720px) {
+
+    .wrapper{
+        height: 400px;
+        width: 300px;
+        margin:  100px auto 0 auto;
+        position: relative;
+    }
+
+    .slider-description p{
+        bottom: -35%;
+        left: 0;
+    }
+
+    .controls{
+        justify-content: center;
+    }
+
+    .slide1{
+        background-image: url("images/mobile/candy-mobile.jpeg");
+        background-repeat: no-repeat;
+    }
+    .slide2{
+        background-image: url("images/mobile/cat-mobile.jpeg");
+        background-repeat: no-repeat;
+    }
+    .slide3{
+        background-image: url("images/mobile/strawbery-mobile.jpeg");
+        background-repeat: no-repeat;
+    }
+    .slide4{
+        background-image: url("images/mobile/tongue-mobile.jpeg");
+        background-repeat: no-repeat;
+    }
 }
